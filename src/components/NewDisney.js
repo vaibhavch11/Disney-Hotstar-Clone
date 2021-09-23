@@ -1,30 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
-// import { useSelector } from "react-redux"
-// import { selectMovies } from "../features/movie/movieSlice"
+import { Link } from "react-router-dom"
 
-function Movies() {
-    // const movies = useSelector(selectMovies);
-
+function NewDisney() {
+    
     return (
         <Conatiner>
-            <h3>Recommanded For You</h3>
+            <h3>New to Disney+</h3>
 
             <Content>
 
-            {/* { movies &&
-                    movies.map((movie)=>(
-                        <Wrap key={index}>
-                            <img src={movie.cardImg} alt={movie.title}/>
-                            
-                        </Wrap>
-                    ))
-                } */}
-
-
-
                  <Wrap>
-                     <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3CMANXeq03jKGp-AgIhQDmr2UaE6-_zGqgg&usqp=CAU" />
+                     <Link to="/">
+                           <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3CMANXeq03jKGp-AgIhQDmr2UaE6-_zGqgg&usqp=CAU" />
+                     </Link>
+                     
                   </Wrap>
                   <Wrap>
                      <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3CMANXeq03jKGp-AgIhQDmr2UaE6-_zGqgg&usqp=CAU" />
@@ -42,7 +32,7 @@ function Movies() {
     )
 }
 
-export default Movies
+export default  NewDisney
 
 const Conatiner = styled.div `
       
