@@ -1,34 +1,35 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { selectRecommend } from "../features/movies/movieSlice"
+import { useSelector } from "react-redux"
+import { selectTrending } from "../features/movies/movieSlice"
 
-function Movies() {
-    const movies = useSelector(selectRecommend);
-
-    return (    
+function Trending() {
+    const movies = useSelector(selectTrending);
+    return (
         <Conatiner>
-            <h3>Recommanded For You</h3>
+        <h3>Trending</h3>
 
-            <Content>
+        <Content>
 
-                {movies && 
-                    movies.map((movie, key)=>(
-                        <Wrap key={key}>
-                           
-                            <Link to={`/details/` + movie.id}>
-                                <img src={movie.cardImg} alt={movie.title}/>
-                            </Link>
-                        </Wrap>
-                ))}
-            </Content>
+            {movies && 
+                movies.map((movie, key)=>(
+                    <Wrap key={key}>
+                    
+                       
+                        <Link to={`/details/` + movie.id}>
+                            <img src={movie.cardImg} alt={movie.title}/>
+                        </Link>
+                    </Wrap>
+            ))}
+        </Content>
 
-        </Conatiner>
-    );
-};
+    </Conatiner>
+    )
 
-export default Movies
+}
+
+export default Trending
 
 const Conatiner = styled.div `
       

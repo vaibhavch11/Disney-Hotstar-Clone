@@ -27,14 +27,14 @@ function ImgSlider() {
            <img src = "/images/slider-scale.jpg" />
           </Wrap>
 
-           {/* <Wrap>
+           <Wrap>
 
            <img src = "/images/slider-badging.jpg" />
-          </Wrap> */}
+          </Wrap>
 
 
 
-          {/* <Wrap>
+          <Wrap>
 
            <img src = "/images/slider-scale.jpg" />
           </Wrap>
@@ -42,7 +42,7 @@ function ImgSlider() {
           <Wrap>
 
            <img src = "/images/slider-scales.jpg" />
-          </Wrap> */}
+          </Wrap>
         </Carousel>
     )
 }

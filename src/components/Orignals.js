@@ -1,34 +1,41 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { selectRecommend } from "../features/movies/movieSlice"
+import { useSelector } from 'react-redux'
+import { selectOriginal } from "../features/movies/movieSlice"
 
-function Movies() {
-    const movies = useSelector(selectRecommend);
 
-    return (    
+
+function Orignals() {
+   const movies = useSelector(selectOriginal);
+    
+    return (
         <Conatiner>
-            <h3>Recommanded For You</h3>
+        <h3>Orignals</h3>
 
-            <Content>
+        <Content>
 
-                {movies && 
-                    movies.map((movie, key)=>(
-                        <Wrap key={key}>
-                           
-                            <Link to={`/details/` + movie.id}>
-                                <img src={movie.cardImg} alt={movie.title}/>
-                            </Link>
-                        </Wrap>
-                ))}
-            </Content>
+            {movies && 
+                movies.map((movie, key)=>(
+                    <Wrap key={key}>
+                    
+                       
+                        <Link to={`/details/` + movie.id}>
+                            <img src={movie.cardImg} alt={movie.title}/>
+                        </Link>
+                    </Wrap>
+            ))}
+        </Content>
 
-        </Conatiner>
-    );
-};
+    </Conatiner>
+    )
 
-export default Movies
+ 
+
+  
+}
+
+export default Orignals
 
 const Conatiner = styled.div `
       
@@ -68,3 +75,4 @@ const Content = styled.div `
       grid-gap: 20px;
       grid-template-columns: repeat(4,minmax(0,1fr));
 `
+

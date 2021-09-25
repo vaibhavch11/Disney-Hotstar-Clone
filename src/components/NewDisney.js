@@ -1,34 +1,35 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { selectRecommend } from "../features/movies/movieSlice"
+import { selectNewDisney } from "../features/movies/movieSlice"
+import { useSelector } from "react-redux"
 
-function Movies() {
-    const movies = useSelector(selectRecommend);
+function NewDisney() {
+    const movies = useSelector(selectNewDisney);
 
-    return (    
+    
+    return (
         <Conatiner>
-            <h3>Recommanded For You</h3>
+        <h3>New to Disney+</h3>
 
-            <Content>
+        <Content>
 
-                {movies && 
-                    movies.map((movie, key)=>(
-                        <Wrap key={key}>
-                           
-                            <Link to={`/details/` + movie.id}>
-                                <img src={movie.cardImg} alt={movie.title}/>
-                            </Link>
-                        </Wrap>
-                ))}
-            </Content>
+            {movies && 
+                movies.map((movie, key)=>(
+                    <Wrap key={key}>
+                       
+                        <Link to={`/details/` + movie.id}>
+                            <img src={movie.cardImg} alt={movie.title}/>
+                        </Link>
+                    </Wrap>
+            ))}
+        </Content>
 
-        </Conatiner>
-    );
-};
+    </Conatiner>
+    )
+}
 
-export default Movies
+export default  NewDisney
 
 const Conatiner = styled.div `
       

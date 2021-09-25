@@ -1,15 +1,39 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import db from "../firebase";
 
 function Details() {
+
+  const { id } = useParams();
+  const [detailData, setDetailData] = useState({});
+
+  useEffect(() => {
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setDetailData(doc.data());
+        } else {
+          console.log("no such document in firebase 🔥");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+  }, [id]);
+  
     return (
         <Container>
            <Background >
-             <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4F39B7E16726ECF419DD7C49E011DD95099AA20A962B0B10AA1881A70661CE45/scale?width=1440&aspectRatio=1.78&format=jpeg" />
+             console.log(detailData.backgroundImg);
+             <img  src={detailData.backgroundImg} alt={detailData.title} />
            </Background>
 
            <ImageTitle>
-               <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/D7AEE1F05D10FC37C873176AAA26F777FC1B71E7A6563F36C6B1B497CAB1CEC2/scale?width=1440&aspectRatio=1.78" />
+                <img alt={detailData.title} src={detailData.titleImg} />
            </ImageTitle>
 
            <ButtonSection>
@@ -38,11 +62,11 @@ function Details() {
 
 
            <SubTitile>
-               In publishing and graphic design, Lorem ipsum
+              {detailData.subTitle}
            </SubTitile>
 
            <Description>
-           Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.
+              {detailData.description}
            </Description>
             
         </Container>
@@ -60,6 +84,7 @@ const Container = styled.div `
 
 const Background = styled.div `
   position:fixed;
+ 
   top:0;
   left:0;
   right:0;
@@ -68,8 +93,8 @@ const Background = styled.div `
   
   img{
     width:100%;
-  height:100%;
-  object-fit:cover;
+   height:100%;
+   object-fit:cover;
   }
  
 `
@@ -119,6 +144,7 @@ const TrailerButton = styled(PlayButton) `
    color:white;
    border:2px solid white;
 
+
 `
 
 const AddButton = styled.button `
@@ -134,6 +160,7 @@ const AddButton = styled.button `
    border:none;
    border:2px solid white;
    background:rgba(0,0,0,0.3);
+   cursor:pointer;
    
 
 
@@ -147,6 +174,7 @@ const AddButton = styled.button `
 const GroupWatch = styled(AddButton) `
 
    background:rgb(0,0,0);
+   cursor:pointer;
 
 `
 
