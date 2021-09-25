@@ -1,46 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
-// import { useSelector } from "react-redux"
-// import { selectMovies } from "../features/movie/movieSlice"
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import { selectRecommend } from "../features/movies/movieSlice"
 
 function Movies() {
-    // const movies = useSelector(selectMovies);
+    const movies = useSelector(selectRecommend);
 
-    return (
+    return (    
         <Conatiner>
             <h3>Recommanded For You</h3>
 
             <Content>
 
-            {/* { movies &&
-                    movies.map((movie)=>(
-                        <Wrap key={index}>
-                            <img src={movie.cardImg} alt={movie.title}/>
-                            
+                {movies && 
+                    movies.map((movie, key)=>(
+                        <Wrap key={key}>
+                           
+                            <Link to={`/details/` + movie.id}>
+                                <img src={movie.cardImg} alt={movie.title}/>
+                            </Link>
                         </Wrap>
-                    ))
-                } */}
-
-
-
-                 <Wrap>
-                     <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3CMANXeq03jKGp-AgIhQDmr2UaE6-_zGqgg&usqp=CAU" />
-                  </Wrap>
-                  <Wrap>
-                     <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3CMANXeq03jKGp-AgIhQDmr2UaE6-_zGqgg&usqp=CAU" />
-                  </Wrap>
-                  <Wrap>
-                     <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3CMANXeq03jKGp-AgIhQDmr2UaE6-_zGqgg&usqp=CAU" />
-                  </Wrap>
-                  <Wrap>
-                     <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3CMANXeq03jKGp-AgIhQDmr2UaE6-_zGqgg&usqp=CAU" />
-                  </Wrap>
+                ))}
             </Content>
 
-            
         </Conatiner>
-    )
-}
+    );
+};
 
 export default Movies
 

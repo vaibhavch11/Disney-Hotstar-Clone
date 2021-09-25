@@ -7,25 +7,54 @@ import Orignals from './Orignals'
 import Trending from './Trending'
 import Viewer from './Viewer'
 
-// import db from "../firebase";
-// import { useDispatch } from "react-redux";
-// import { setMovies } from '../features/movie/movieSlice'
+import { useDispatch,useSelector } from "react-redux"
+import db from "../firebase";
+import { setMovies } from "../features/movies/movieSlice"
+import { selectUserName } from "../features/counter/counterSlice"
+
 
 function Home() {
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const userName = useSelector(selectUserName);
 
-    // useEffect(()=>{
-    //     db.collection("movies").onSnapshot((snapshot) => {
-    //         let tempMovies = snapshot.docs.map((doc) => {
-    //             return { id: doc.id, ...doc.data() };
-    //         });
-    //         dispatch(
-    //             setMovies(tempMovies)
-    //         );
-    //         console.log(tempMovies);
-    //     })
-    // }, [])
+    let recommends = [];
+    let newDisneys = [];
+    let orignals = [];
+    let trending = [];
+
+ 
+    useEffect(()=>{
+        db.collection('movies').onSnapshot((snapshot)=>{
+            snapshot.docs.map((doc)=>{
+                switch(doc.data().type){
+                    case 'recommend':
+                        recommends = [...recommends,{id: doc.id, ...doc.data()}]
+                        break;
+
+                    case 'new':
+                        newDisneys = [...newDisneys,{id: doc.id, ...doc.data()}]
+                        break;    
+
+                    case 'orignal':
+                        orignals = [...orignals,{id: doc.id, ...doc.data()}]
+                        break;
+
+                    case 'trending':
+                        trending = [...trending,{id: doc.id, ...doc.data()}]
+                        break;  
+                }
+            });
+       
+
+        dispatch(setMovies({
+            recommend : recommends,
+            newDisney: newDisneys,
+            orignal: orignals,
+            trending: trending,
+        })
+        ) })
+    },[userName]);
 
 
 
@@ -35,8 +64,9 @@ function Home() {
             <Viewer/>
             <Movies />
             <NewDisney />
-            <Orignals />
             <Trending />
+            <Orignals />
+           
         </Conatiner>
     )
 }
